@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" role="img" aria-label="Two layers: knowledge base (Obsidian) and process layer (wl), linked both ways">
+  <style>
+    svg{ --ink:#23272e; --soft:#5b6470; --line:#c9cfd8; --box:#ffffff;
+         --kb:#5a6472; --kb-bg:#f3f5f8; --wl:#3a6ea5; --wl-bg:#eef4fb; }
+    @media (prefers-color-scheme:dark){
+      svg{ --ink:#e6e8ec; --soft:#9aa2ae; --line:#3a3f48; --box:#1b1e24;
+           --kb:#98a2b3; --kb-bg:#20242b; --wl:#6ea3d6; --wl-bg:#182029; }
+    }
+    .ttl{ font-size:18px; font-weight:700; }
+    .sub{ font-size:13px; font-style:italic; }
+    .body{ font-size:12.5px; }
+    .cap{ font-size:12px; }
+    .mut{ fill:var(--soft); }
+  </style>
+
+  <!-- Left: knowledge base -->
+  <rect x="26" y="40" width="290" height="150" rx="14" fill="var(--kb-bg)" stroke="var(--kb)" stroke-width="1.6"/>
+  <text class="ttl" x="46" y="73" fill="var(--ink)">Knowledge base · Obsidian</text>
+  <text class="sub mut" x="46" y="96">“second brain”</text>
+  <text class="body" x="46" y="127" fill="var(--ink)">settled conclusions, references</text>
+  <text class="body mut" x="46" y="149">long-term · prose · stable</text>
+  <text class="body mut" x="46" y="171">large, read/written rarely</text>
+
+  <!-- Right: process layer -->
+  <rect x="404" y="40" width="290" height="150" rx="14" fill="var(--wl-bg)" stroke="var(--wl)" stroke-width="2"/>
+  <text class="ttl" x="424" y="73" fill="var(--wl)">Process layer · wl</text>
+  <text class="sub mut" x="424" y="96">“a structured quick context beside it”</text>
+  <text class="body" x="424" y="127" fill="var(--ink)">today's work, progress, decisions</text>
+  <text class="body mut" x="424" y="149">current · frequent · structured</text>
+  <text class="body mut" x="424" y="171">small, read/written constantly</text>
+
+  <!-- two-way arrow -->
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--soft)"/>
+    </marker>
+  </defs>
+  <line x1="322" y1="115" x2="398" y2="115" stroke="var(--soft)" stroke-width="1.8" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  <text class="cap" x="360" y="105" fill="var(--soft)" text-anchor="middle">two-</text>
+  <text class="cap" x="360" y="132" fill="var(--soft)" text-anchor="middle">way</text>
+
+  <!-- caption -->
+  <text class="cap mut" x="360" y="222" text-anchor="middle">A task holds its docs; from a doc you find its tasks — each layer does what it's good at, no overwriting</text>
+</svg>

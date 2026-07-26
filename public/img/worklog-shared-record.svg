@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif" role="img" aria-label="多个 AI 会话读写同一个 wl 存储，看到同一份记录">
+  <style>
+    svg{ --ink:#23272e; --soft:#5b6470; --line:#c9cfd8; --sess-bg:#f3f5f8; --sess:#5a6472;
+         --wl:#3a6ea5; --wl-bg:#eef4fb; }
+    @media (prefers-color-scheme:dark){
+      svg{ --ink:#e6e8ec; --soft:#9aa2ae; --line:#3a3f48; --sess-bg:#20242b; --sess:#98a2b3;
+           --wl:#6ea3d6; --wl-bg:#182029; }
+    }
+    .ttl{ font-size:16.5px; font-weight:700; }
+    .body{ font-size:13px; }
+    .cap{ font-size:12.5px; }
+    .mut{ fill:var(--soft); }
+  </style>
+
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--soft)"/>
+    </marker>
+  </defs>
+
+  <!-- 左侧三个 AI 会话 -->
+  <g>
+    <rect x="24" y="40" width="180" height="42" rx="10" fill="var(--sess-bg)" stroke="var(--sess)" stroke-width="1.6"/>
+    <text class="body" x="42" y="66" fill="var(--ink)">AI 会话 A</text>
+    <rect x="24" y="108" width="180" height="42" rx="10" fill="var(--sess-bg)" stroke="var(--sess)" stroke-width="1.6"/>
+    <text class="body" x="42" y="134" fill="var(--ink)">AI 会话 B</text>
+    <rect x="24" y="176" width="180" height="42" rx="10" fill="var(--sess-bg)" stroke="var(--sess)" stroke-width="1.6"/>
+    <text class="body" x="42" y="202" fill="var(--ink)">AI 会话 C</text>
+  </g>
+
+  <!-- 汇聚箭头（双向：读 + 写） -->
+  <line x1="206" y1="61"  x2="428" y2="120" stroke="var(--soft)" stroke-width="1.7" marker-start="url(#a2)" marker-end="url(#a2)"/>
+  <line x1="206" y1="129" x2="428" y2="129" stroke="var(--soft)" stroke-width="1.7" marker-start="url(#a2)" marker-end="url(#a2)"/>
+  <line x1="206" y1="197" x2="428" y2="138" stroke="var(--soft)" stroke-width="1.7" marker-start="url(#a2)" marker-end="url(#a2)"/>
+
+  <!-- 中间 wl 存储 -->
+  <rect x="430" y="88" width="180" height="84" rx="14" fill="var(--wl-bg)" stroke="var(--wl)" stroke-width="2"/>
+  <text class="ttl" x="520" y="122" fill="var(--wl)" text-anchor="middle">wl</text>
+  <text class="cap mut" x="520" y="145" text-anchor="middle">一个 SQLite 文件</text>
+
+  <!-- 右侧标注 -->
+  <text class="body" x="636" y="125" fill="var(--ink)">同一份</text>
+  <text class="body" x="636" y="146" fill="var(--ink)">记录</text>
+  <line x1="612" y1="130" x2="628" y2="130" stroke="var(--soft)" stroke-width="1.5"/>
+
+  <!-- 底部说明 -->
+  <text class="cap mut" x="360" y="244" text-anchor="middle">几个会话并行做事，读写的是同一份记录：一个会话记下的进展，另一个开工前查一下就有</text>
+</svg>

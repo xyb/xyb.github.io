@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ metadata.language }}">
+<html lang="{{ lang or metadata.language }}">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
 
 		{#- IndieAuth: 用自己域名做去中心化登录，认证委托给 GitHub。rel="me" 双向链接是身份验证前提 #}
 		<link href="{{ metadata.author.github }}" rel="me authn">
+		<link href="{{ metadata.author.twitter }}" rel="me">
 		<link href="mailto:{{ metadata.author.email }}" rel="me">
 
 		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
@@ -69,11 +70,38 @@
 
 		<footer>
 			<p>
+				<a href="{{ metadata.author.github }}" rel="me">GitHub</a> ·
+				<a href="{{ metadata.author.twitter }}" rel="me">X</a>
+			</p>
+			<p>
 				<em>Built with <a href="https://www.11ty.dev/">{{ eleventy.generator }}</a></em>
 			</p>
 		</footer>
 
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+
+		{#- Copy button on highlighted code blocks #}
+		<script>
+		document.querySelectorAll('pre[class*="language-"]').forEach(function (pre) {
+			var btn = document.createElement("button");
+			btn.type = "button";
+			btn.className = "copy-code-btn";
+			btn.textContent = "Copy";
+			btn.setAttribute("aria-label", "Copy code to clipboard");
+			btn.addEventListener("click", function () {
+				var code = pre.querySelector("code") || pre;
+				navigator.clipboard.writeText(code.innerText).then(function () {
+					btn.textContent = "Copied";
+					btn.classList.add("copied");
+					setTimeout(function () {
+						btn.textContent = "Copy";
+						btn.classList.remove("copied");
+					}, 1500);
+				});
+			});
+			pre.appendChild(btn);
+		});
+		</script>
 	</body>
 </html>

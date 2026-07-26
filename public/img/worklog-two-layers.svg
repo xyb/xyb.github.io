@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif" role="img" aria-label="两层结构：知识库(Obsidian) 与 过程层(wl) 双向关联">
+  <style>
+    svg{ --ink:#23272e; --soft:#5b6470; --line:#c9cfd8; --box:#ffffff;
+         --kb:#5a6472; --kb-bg:#f3f5f8; --wl:#3a6ea5; --wl-bg:#eef4fb; }
+    @media (prefers-color-scheme:dark){
+      svg{ --ink:#e6e8ec; --soft:#9aa2ae; --line:#3a3f48; --box:#1b1e24;
+           --kb:#98a2b3; --kb-bg:#20242b; --wl:#6ea3d6; --wl-bg:#182029; }
+    }
+    .ttl{ font-size:19px; font-weight:700; }
+    .sub{ font-size:13.5px; font-style:italic; }
+    .body{ font-size:13px; }
+    .cap{ font-size:12.5px; }
+    .mut{ fill:var(--soft); }
+  </style>
+
+  <!-- 左：知识库 -->
+  <rect x="26" y="40" width="290" height="150" rx="14" fill="var(--kb-bg)" stroke="var(--kb)" stroke-width="1.6"/>
+  <text class="ttl" x="46" y="74" fill="var(--ink)">知识库 · Obsidian</text>
+  <text class="sub mut" x="46" y="97">「第二大脑」</text>
+  <text class="body" x="46" y="128" fill="var(--ink)">想清楚的结论、整理好的资料</text>
+  <text class="body mut" x="46" y="150">长期 · 成篇 · 稳定</text>
+  <text class="body mut" x="46" y="172">数据量大，读写不频繁</text>
+
+  <!-- 右：过程层 -->
+  <rect x="404" y="40" width="290" height="150" rx="14" fill="var(--wl-bg)" stroke="var(--wl)" stroke-width="2"/>
+  <text class="ttl" x="424" y="74" fill="var(--wl)">过程层 · wl</text>
+  <text class="sub mut" x="424" y="97">「旁边一块结构化快取」</text>
+  <text class="body" x="424" y="128" fill="var(--ink)">今天在做的、进展、决策、想法</text>
+  <text class="body mut" x="424" y="150">当下 · 频繁 · 结构化</text>
+  <text class="body mut" x="424" y="172">数据量小，读写迅速</text>
+
+  <!-- 中间双向箭头 -->
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--soft)"/>
+    </marker>
+  </defs>
+  <line x1="322" y1="115" x2="398" y2="115" stroke="var(--soft)" stroke-width="1.8" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  <text class="cap" x="360" y="106" fill="var(--soft)" text-anchor="middle">双向</text>
+  <text class="cap" x="360" y="132" fill="var(--soft)" text-anchor="middle">关联</text>
+
+  <!-- 底部说明 -->
+  <text class="cap mut" x="360" y="222" text-anchor="middle">任务上挂着文档，从文档也能反查到挂它的任务 —— 两层各管各擅长的，不互相覆盖</text>
+</svg>
