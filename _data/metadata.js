@@ -3,6 +3,8 @@ export default {
 	url: "https://xieyanbo.me/",
 	language: "en",
 	description: "Software Engineer, Python Developer, Linux and Mac User, Live in Beijing, Chinese",
+	// Cloudflare Web Analytics beacon token (dash -> Analytics & Logs -> Web Analytics -> Add a site). Empty = analytics off.
+	cloudflareAnalyticsToken: "5038583e9b0c455bb78caa3d9ccfb9a5",
 	author: {
 		name: "Xie Yanbo",
 		email: "xieyanbo@gmail.com",

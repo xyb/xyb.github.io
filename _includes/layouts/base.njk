@@ -43,6 +43,11 @@
 
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+
+		{%- if metadata.cloudflareAnalyticsToken %}
+		{#- Cloudflare Web Analytics (privacy-first, no cookies) #}
+		<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ metadata.cloudflareAnalyticsToken }}"}'></script>
+		{%- endif %}
 	</head>
 	<body>
 		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
