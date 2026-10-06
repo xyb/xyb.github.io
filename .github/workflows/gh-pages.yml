@@ -21,6 +21,7 @@
 name: Deploy to GitHub Pages
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - xyb
@@ -53,6 +54,15 @@ jobs:
           key: ${{ runner.os }}-eleventy-fetch-cache
 
       - run: npm ci
+      - name: Download firmware
+        run: |
+          set -eu
+          dir=public/cardputer
+          mkdir -p "$dir"
+          for name in bootloader.bin partitions.bin boot_app0.bin firmware.bin; do
+            curl -fsSL -o "$dir/$name" \
+              "https://github.com/xyb/xyb.github.io/releases/download/cardputer-mp3/$name"
+          done
       - run: npm run build-ghpages
 
       - name: Upload static files as artifact
