@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cardputer MP3 播放器</title>
+<script type="module" src="https://cdn.jsdelivr.net/npm/esp-web-tools@10.4.0/dist/web/install-button.js"></script>
+<style>
+  body { font: 16px/1.5 sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+  h1 { font-size: 1.4rem; font-weight: 600; }
+  .ver { color: #555; }
+  button { font: inherit; padding: 0.55rem 1rem; }
+</style>
+</head>
+<body>
+<h1>Cardputer MP3 播放器</h1>
+<p class="ver">版本 0.1.0 · 构建 116dac6 · 2026-10-05 23:53:06</p>
+<p>用 Chrome 或 Edge 打开这个页面。用数据线把 M5Stack Cardputer 接到电脑，点下面的按钮，在弹出的窗口里选中这块板子。</p>
+<p>写入的是引导程序、8 MB 分区表，以及播放器本身。播放器写在第一块程序槽，下次从这里启动。已经保存的音量和 WiFi 会留着。</p>
+<esp-web-install-button manifest="manifest.json">
+  <button slot="activate">安装到 Cardputer</button>
+  <span slot="unsupported">这个浏览器不能直接写设备。请换 Chrome 或 Edge。</span>
+  <span slot="not-allowed">这个页面需要通过 https 打开。在自己电脑上试，可以用 localhost。</span>
+</esp-web-install-button>
+<p>适合 Cardputer ADV，也适合原版 Cardputer。芯片是 ESP32-S3。</p>
+</body>
+</html>
