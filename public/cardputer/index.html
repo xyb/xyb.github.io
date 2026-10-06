@@ -14,7 +14,7 @@
 </head>
 <body>
 <h1>Cardputer MP3 播放器</h1>
-<p class="ver">版本 0.1.0 · 构建 116dac6 · 2026-10-05 23:53:06</p>
+<p class="ver">版本 0.1.0 · 构建 116dac6-dirty · 2026-10-06 17:48:33</p>
 <p>用 Chrome 或 Edge 打开这个页面。用数据线把 M5Stack Cardputer 接到电脑，点下面的按钮，在弹出的窗口里选中这块板子。</p>
 <p>写入的是引导程序、8 MB 分区表，以及播放器本身。播放器写在第一块程序槽，下次从这里启动。已经保存的音量和 WiFi 会留着。</p>
 <esp-web-install-button manifest="manifest.json">
@@ -23,5 +23,113 @@
   <span slot="not-allowed">这个页面需要通过 https 打开。在自己电脑上试，可以用 localhost。</span>
 </esp-web-install-button>
 <p>适合 Cardputer ADV，也适合原版 Cardputer。芯片是 ESP32-S3。</p>
+<script>
+(function () {
+  var exact = {
+    "Connecting": "正在连接",
+    "Installing": "正在写入",
+    "Erasing": "正在清空",
+    "Preparing installation": "正在准备",
+    "Preparing installation...": "正在准备",
+    "Wrapping up": "即将完成",
+    "Initializing...": "正在启动",
+    "Installation complete!": "安装完成",
+    "Installation failed": "安装失败",
+    "Installation prepared": "准备完成",
+    "Confirm Installation": "确认安装",
+    "Erase device": "清空设备",
+    "Erase User Data": "清除已保存的数据",
+    "Erasing device...": "正在清空设备",
+    "Device erased": "设备已清空",
+    "Writing complete": "写入完成",
+    "All done!": "全部完成",
+    "Logs & Console": "日志",
+    "Logs": "日志",
+    "Reset Device": "重启设备",
+    "Download Logs": "下载日志",
+    "Configure Wi-Fi": "设置 Wi-Fi",
+    "Connect to Wi-Fi": "连接 Wi-Fi",
+    "Change Wi-Fi": "更换 Wi-Fi",
+    "Trying to connect": "正在连接",
+    "Scanning for networks": "正在搜索网络",
+    "Unable to connect": "连不上",
+    "Timeout": "超时",
+    "Error": "出错",
+    "Disconnected": "连接已断开",
+    "Back": "返回",
+    "Next": "下一步",
+    "Install": "安装",
+    "Failed to download manifest": "读不到安装清单",
+    "Serial port is not readable/writable. Close any other application using it and try again.": "串口正被别的程序占用。关掉那个程序后再试。",
+    "Serial port is not ready. Close any other application using it and try again.": "串口还没准备好。关掉占用它的程序后再试。",
+    "Failed to initialize. Try resetting your device or holding the BOOT button while clicking INSTALL.": "没有连上设备。重启一下，或按住 BOOT 再点「安装」。",
+    "Do you want to erase the device before installing": "安装前要清空这块设备吗",
+    "All data on the device will be lost.": "设备上的数据都会丢失。",
+    "All data on the device will be erased.": "设备上已保存的数据会被清掉。",
+    "Do you want to reset your device and erase all user data from your device?": "要重置设备并清掉已保存的数据吗？",
+    "Do you want to install": "要安装",
+    "Do you want to update to": "要更新为",
+    "Your device is running": "这块设备现在的程序是",
+    "This will take": "大约需要",
+    "2 minutes": "2 分钟",
+    "a minute": "1 分钟",
+    "Keep this page visible to prevent slow down": "请保持这个页面在前台，否则会变慢"
+  };
+  var phrases = [
+    "Keep this page visible to prevent slow down",
+    "Do you want to reset your device and erase all user data from your device?",
+    "Serial port is not readable/writable. Close any other application using it and try again.",
+    "Serial port is not ready. Close any other application using it and try again.",
+    "Failed to initialize. Try resetting your device or holding the BOOT button while clicking INSTALL.",
+    "Do you want to erase the device before installing",
+    "All data on the device will be erased.",
+    "All data on the device will be lost.",
+    "Do you want to update to",
+    "Do you want to install",
+    "Your device is running",
+    "This will take",
+    "2 minutes",
+    "a minute"
+  ];
+  function translateNode(node) {
+    if (node.nodeType === 1 && node.localName === "ewt-console") return;
+    if (node.nodeType === 3) {
+      var raw = node.nodeValue;
+      if (!raw || !/[A-Za-z]/.test(raw)) return;
+      var key = raw.replace(/\s+/g, " ").trim();
+      if (exact[key]) {
+        node.nodeValue = exact[key];
+        return;
+      }
+      var next = raw;
+      for (var i = 0; i < phrases.length; i++) {
+        var en = phrases[i];
+        if (next.indexOf(en) !== -1) next = next.split(en).join(exact[en]);
+      }
+      var installed = next.match(/^(\s*)Install (.+?)(\s*)$/);
+      if (installed) next = installed[1] + "安装 " + installed[2] + installed[3];
+      if (next !== raw) node.nodeValue = next;
+      return;
+    }
+    if (node.nodeType !== 1 && node.nodeType !== 11) return;
+    if (node.shadowRoot) translateNode(node.shadowRoot);
+    var kids = node.childNodes;
+    for (var j = 0; j < kids.length; j++) translateNode(kids[j]);
+  }
+  var busy = false;
+  function translateAll() {
+    if (busy) return;
+    busy = true;
+    var dialogs = document.querySelectorAll("ewt-install-dialog");
+    for (var i = 0; i < dialogs.length; i++) translateNode(dialogs[i]);
+    busy = false;
+  }
+  new MutationObserver(translateAll).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+})();
+</script>
 </body>
 </html>
